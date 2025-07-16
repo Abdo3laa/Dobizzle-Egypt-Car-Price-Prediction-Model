@@ -1,6 +1,7 @@
 # 🚗 Dubizzle Egypt Car Price Prediction – ML Pipeline & App
 
-A comprehensive data science and machine learning pipeline designed to predict used car prices from **Dubizzle Egypt** listings (available at [https://dubai.dubizzle.com]([https://dubai.dubizzle.com](https://www.dubizzle.com.eg/))). This project encompasses **data scraping**, **exploratory data analysis (EDA)**, **preprocessing**, **model training**, and a professional **Streamlit web app** for price prediction and visualization.
+A comprehensive data science and machine learning pipeline designed to predict used car prices from **Dubizzle Egypt** listings (available at [https://www.dubizzle.com.eg](https://www.dubizzle.com.eg)). This project encompasses **data scraping**, **exploratory data analysis (EDA)**, **preprocessing**, **model training**, and a professional **Streamlit web app** for price prediction and visualization.
+
 
 ![Dubizzle Cars Logo](dubizzle-cars-logo.png)
 
