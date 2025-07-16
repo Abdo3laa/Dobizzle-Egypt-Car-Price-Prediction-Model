@@ -1,7 +1,6 @@
-# 🚗 Dubizzle Egypt Car Price Prediction – ML Pipeline & App
+# 🚗 Dubizzle Egypt Car Price Prediction – ML Pipeline, App & Dashboard
 
-A comprehensive data science and machine learning pipeline designed to predict used car prices from **Dubizzle Egypt** listings (available at [https://www.dubizzle.com.eg](https://www.dubizzle.com.eg)). This project encompasses **data scraping**, **exploratory data analysis (EDA)**, **preprocessing**, **model training**, and a professional **Streamlit web app** for price prediction and visualization.
-
+A comprehensive data science and machine learning pipeline designed to predict used car prices from **Dubizzle Egypt** listings (available at [https://www.dubizzle.com.eg](https://www.dubizzle.com.eg)). This project encompasses **data scraping**, **exploratory data analysis (EDA)**, **preprocessing**, **model training**, a professional **Streamlit web app**, and an interactive **Power BI dashboard** for price prediction and market insights.
 
 ![Dubizzle Cars Logo](dubizzle-cars-logo.png)
 
@@ -9,16 +8,32 @@ A comprehensive data science and machine learning pipeline designed to predict u
 
 ## 📁 Project Structure
 
-| File / Folder                        | Description |
-|--------------------------------------|-------------|
-| `Dubizzle_Scraping.py`              | Python script utilizing `requests` and `BeautifulSoup` to scrape car listing links and raw data from Dubizzle Egypt. |
-| `dubizzle_full_dataset.csv`         | Raw dataset post-scraping, potentially containing missing or inconsistent values. |
-| `Dubizzle_Preprocessing.ipynb`      | Jupyter notebook for data cleaning, null handling, outlier management, feature engineering (e.g., log transformations), and encoding. |
-| `dubizzle_cleaned_dataset.csv`      | Processed dataset optimized for modeling and app deployment. |
-| `Dubizzle_Modeling.ipynb`           | Notebook training multiple regression models (Linear, Ridge, Random Forest, etc.) with GridSearchCV, evaluated via R², RMSE, and residuals. |
+| File / Folder                             | Description |
+|-------------------------------------------|-------------|
+| `Dubizzle_Scraping.py`                   | Python script utilizing `requests` and `BeautifulSoup` to scrape car listing links and raw data from Dubizzle Egypt. |
+| `dubizzle_full_dataset.csv`              | Raw dataset post-scraping, potentially containing missing or inconsistent values. |
+| `Dubizzle_Preprocessing.ipynb`           | Jupyter notebook for data cleaning, null handling, outlier management, feature engineering (e.g., log transformations), and encoding. |
+| `dubizzle_cleaned_dataset.csv`           | Processed dataset optimized for modeling and app deployment. |
+| `Dubizzle_Modeling.ipynb`                | Notebook training multiple regression models (Linear, Ridge, Random Forest, etc.) with GridSearchCV, evaluated via R², RMSE, and residuals. |
 | `RandomForest_model.pkl` / `XGBRegressor_model.pkl` | Serialized ML models saved using `pickle`. |
-| `Deployment.py`                     | Streamlit app featuring three main pages: Home (KPIs), Visualizations (Plotly-based), and Price Prediction (form or dataset upload). |
-| `dubizzle-cars-logo.png`            | Logo integrated into the Streamlit app homepage. |
+| `Deployment.py`                          | Streamlit app featuring three main pages: Home (KPIs), Visualizations (Plotly-based), and Price Prediction. |
+| `dubizzle-cars-logo.png`                 | Logo integrated into the Streamlit app homepage. |
+| `PowerBI_Dashboard/`                     | Contains Power BI dashboard file (`.pbix`) and visual exports for 3 report pages. |
+
+---
+
+## 📊 Power BI Dashboard
+
+An interactive dashboard built with **Power BI** for visualizing car market trends across Egypt. It provides intuitive insights from the cleaned dataset, designed to assist in business decision-making and car price comparisons.
+
+**Folder**: `PowerBI_Dashboard/`  
+**Includes**:
+- `Dubizzil_Cars_Dashboard.pbix`: Main dashboard file.
+- `Market Overview.png`: Total listings, price insights, and fuel type distribution.
+- `Brands Insights.png`: Top brands by listing count, price averages, and KPIs.
+- `Demographics.png`: Insights on car colors, body types, seating, and locations.
+
+Each page highlights key metrics using Dubizzle's visual style and color palette.
 
 ---
 
@@ -30,6 +45,7 @@ A comprehensive data science and machine learning pipeline designed to predict u
 - Train and tune multiple regression models.
 - Visualize market trends: top brands, price distributions, and location insights.
 - Deploy a robust **Streamlit web app** with comprehensive prediction capabilities.
+- Build a business-oriented dashboard with **Power BI**.
 
 ---
 
@@ -71,8 +87,6 @@ Leverages `Plotly` for interactive insights:
 ### 🧠 Overview
 
 Multiple regression models were trained and evaluated to predict car prices based on Dubizzle Egypt listings, with preprocessing including log transformation of skewed data (`price`, `kilometers`).
-
----
 
 ### ✅ Test Performance Summary
 
@@ -138,7 +152,7 @@ Preprocessing steps applied prior to modeling:
 - ✅ Applied OneHotEncoding to all categorical features.
 - ✅ Scaled numerical features with `StandardScaler`.
 
-Final dataset exported as: **`dubizzle_cleaned_dataset.csv`**.
+> Final dataset exported as: `dubizzle_cleaned_dataset.csv`
 
 ---
 
