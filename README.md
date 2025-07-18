@@ -15,7 +15,7 @@ A comprehensive data science and machine learning pipeline designed to predict u
 | `Dubizzle_Preprocessing.ipynb`           | Jupyter notebook for data cleaning, null handling, outlier management, feature engineering (e.g., log transformations), and encoding. |
 | `dubizzle_cleaned_dataset.csv`           | Processed dataset optimized for modeling and app deployment. |
 | `Dubizzle_Modeling.ipynb`                | Notebook training multiple regression models (Linear, Ridge, Random Forest, etc.) with GridSearchCV, evaluated via R², RMSE, and residuals. |
-| `RandomForest_model.pkl` / `XGBRegressor_model.pkl` | Serialized ML models saved using `pickle`. |
+| `LinearRegression_model.pkl`             | Serialized Linear Regression model saved using `pickle`. |
 | `Deployment.py`                          | Streamlit app featuring three main pages: Home (KPIs), Visualizations (Plotly-based), and Price Prediction. |
 | `dubizzle-cars-logo.png`                 | Logo integrated into the Streamlit app homepage. |
 | `PowerBI_Dashboard/`                     | Contains Power BI dashboard file (`.pbix`) and visual exports for 3 report pages. |
@@ -68,17 +68,8 @@ Leverages `Plotly` for interactive insights:
 ### 3. 📈 Predict Price Page
 - Dynamic form: Select brand to filter models.
 - Input features: year, transmission, color, etc.
-- Predicts using the **XGBoost Regressor model**.
+- Predicts using the **Linear Regression model**.
 - Displays **estimated market price in EGP** with a 95% confidence interval.
-
-### 4. 📥 Upload & Predict Page
-- Upload a custom CSV file.
-- Automatically preprocesses data (log-transform, encoding).
-- Predicts prices for uploaded data.
-- If actual `price` is present:
-  - Reports **R² Score** and **RMSE**.
-  - Visualizations: Actual vs. Predicted, Residuals Histogram, Q-Q Plot.
-- Option to download predictions as a CSV.
 
 ---
 
@@ -92,10 +83,10 @@ Multiple regression models were trained and evaluated to predict car prices base
 
 | Model                   | R² Score | MAE (EGP) | RMSE (EGP) |
 |-------------------------|----------|-----------|------------|
-| Linear Regression       | 0.7865   | 291,317   | 1,016,598  |
+| **Linear Regression**       | **0.7865** | **291,317**   | **1,016,598**  |
 | Random Forest Regressor | 0.7551   | 308,642   | 1,088,705  |
 | Gradient Boosting       | 0.7315   | 371,683   | 1,140,086  |
-| **XGBoost Regressor**   | **0.7678** | **315,759** | **1,060,266** |
+| XGBoost Regressor       | 0.7678   | 315,759   | 1,060,266  |
 | LightGBM Regressor      | 0.6081   | 448,007   | 1,377,232  |
 | CatBoost Regressor      | 0.7103   | 385,354   | 1,184,142  |
 
@@ -105,52 +96,53 @@ Multiple regression models were trained and evaluated to predict car prices base
 
 ### 🏆 Best Performing Model
 
-✅ **XGBoost Regressor**
-- Offers the best trade-off between R² score and error metrics.
-- Ideal for deployment and dashboard integration.
-- Resilient to outliers and skewed distributions.
+✅ **Linear Regression**  
+- Achieved the **highest R² score** and **lowest error values** overall  
+- Despite its simplicity, it outperformed more complex models like XGBoost and Random Forest  
+- Recommended for deployment, price prediction, and dashboard integration
 
 ---
 
 ### 🔎 Key Insights
 
-- Linear Regression performed notably well given its simplicity.
-- Random Forest and Gradient Boosting showed strong but slightly lower accuracy.
-- LightGBM underperformed, potentially due to insufficient tuning.
-- CatBoost managed categorical data effectively but was outpaced by XGBoost.
+- **Linear Regression** outperformed all advanced models, showing the effectiveness of clean data and proper preprocessing  
+- **XGBoost** came in close and remains a flexible alternative  
+- **Random Forest** and **Gradient Boosting** had decent but slightly lower accuracy  
+- **LightGBM** underperformed in this context, possibly due to minimal hyperparameter tuning  
+- **CatBoost** handled categorical features well, but didn’t match the performance of simpler models
 
 ---
 
 ### 💡 Recommendation
 
-Adopt **XGBoost Regressor** for:
-- Model serialization (`.pkl`).
-- Streamlit app deployment.
-- Business dashboard integration.
+Adopt **Linear Regression** for:
+- Model serialization (`.pkl`)
+- Streamlit app deployment
+- Business dashboard integration
 
-To enhance performance:
-- Incorporate feature engineering (e.g., `car_age`, `avg_price_city`).
-- Implement outlier treatment.
-- Explore model stacking or ensembling.
+To further enhance performance:
+- Incorporate feature engineering (e.g., `car_age`, `avg_price_city`)
+- Apply outlier detection/removal
+- Explore ensemble models for marginal improvements
 
 ---
 
 ## 🧹 Data Preprocessing Summary
 
 Preprocessing steps applied prior to modeling:
-- ✅ Removed rows with missing values in critical columns (`price`, `city`).
-- ✅ Replaced invalid kilometer values (`'-'`) with NaN, then cleaned.
-- ✅ Applied log transformation to `price` and `kilometers` to mitigate skewness.
-- ✅ Split `location` into `area` and `city`.
-- ✅ Categorized `date_posted` into `hours ago`, `days ago`, `weeks ago`.
-- ✅ Cleaned `price` column (removed "EGP") and converted to integer.
+- ✅ Removed rows with missing values in critical columns (`price`, `city`)
+- ✅ Replaced invalid kilometer values (`'-'`) with NaN, then cleaned
+- ✅ Applied log transformation to `price` and `kilometers` to mitigate skewness
+- ✅ Split `location` into `area` and `city`
+- ✅ Categorized `date_posted` into `hours ago`, `days ago`, `weeks ago`
+- ✅ Cleaned `price` column (removed "EGP") and converted to integer
 - ✅ Filled missing values with:
-  - Mode for: `body_type`, `color`, `payment_option`, `interior`, `seats`.
-  - `'Unknown'` for: `model`.
-- ✅ Managed extreme outliers via boxplot analysis.
-- ✅ Removed duplicate entries.
-- ✅ Applied OneHotEncoding to all categorical features.
-- ✅ Scaled numerical features with `StandardScaler`.
+  - Mode for: `body_type`, `color`, `payment_option`, `interior`, `seats`
+  - `'Unknown'` for: `model`
+- ✅ Managed extreme outliers via boxplot analysis
+- ✅ Removed duplicate entries
+- ✅ Applied OneHotEncoding to all categorical features
+- ✅ Scaled numerical features with `StandardScaler`
 
 > Final dataset exported as: `dubizzle_cleaned_dataset.csv`
 
